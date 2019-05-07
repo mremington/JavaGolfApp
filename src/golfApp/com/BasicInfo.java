@@ -14,6 +14,12 @@ public abstract class BasicInfo {
     private String phone;
     private String address;
 
+    public BasicInfo(String n, String ph, String add){
+        setName(n);
+        setPhone(ph);
+        setAddress(add);
+    }
+    
     /**
      * @return the name
      */
