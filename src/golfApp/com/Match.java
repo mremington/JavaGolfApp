@@ -5,6 +5,8 @@
  */
 package golfApp.com;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -105,4 +107,14 @@ public class Match implements Calculatable{
     public int compareScores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+	@Override
+	public void writeToFile(String path) throws IOException {
+	    String fileContent = "Match Text";
+	     
+	    FileWriter fileWriter = new FileWriter(path);
+	    fileWriter.write(fileContent);
+	    fileWriter.close();
+		
+	}
 }

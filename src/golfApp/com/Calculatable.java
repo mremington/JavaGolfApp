@@ -5,6 +5,8 @@
  */
 package golfApp.com;
 
+import java.io.IOException;
+
 /**
  *
  * @author michael.remington
@@ -12,4 +14,5 @@ package golfApp.com;
 public interface Calculatable {
     public int calculateScores();
     public int compareScores();
+    public void writeToFile(String path) throws IOException;
 }
