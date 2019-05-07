@@ -15,8 +15,70 @@ public class User extends BasicInfo{
     private String password;
     private String email;
     private School schoolID;
+    
+    
 
-    @Override
+    public String[] getTypes() {
+		return types;
+	}
+
+
+
+	public void setTypes(String[] types) {
+		this.types = types;
+	}
+
+
+
+	public String getUserName() {
+		return userName;
+	}
+
+
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+
+	public School getSchoolID() {
+		return schoolID;
+	}
+
+
+
+	public void setSchoolID(School schoolID) {
+		this.schoolID = schoolID;
+	}
+
+
+
+	@Override
     public String displayInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
