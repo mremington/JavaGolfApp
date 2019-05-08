@@ -10,63 +10,49 @@ package golfApp.com;
  * @author michael.remington
  */
 public class League extends BasicInfo {
-	
-	private User representative;
-	private String conference;
-	private String section;
-	private String region;
-    
-    
+
+    private User representative;
+    private String conference;
+    private String section;
+    private String region;
+
+    public League(String n, String ph, String add) {
+        super(n, ph, add);
+    }
 
     public User getRepresentative() {
-		return representative;
-	}
+        return representative;
+    }
 
+    public void setRepresentative(User representative) {
+        this.representative = representative;
+    }
 
+    public String getConference() {
+        return conference;
+    }
 
-	public void setRepresentative(User representative) {
-		this.representative = representative;
-	}
+    public void setConference(String conference) {
+        this.conference = conference;
+    }
 
+    public String getSection() {
+        return section;
+    }
 
+    public void setSection(String section) {
+        this.section = section;
+    }
 
-	public String getConference() {
-		return conference;
-	}
+    public String getRegion() {
+        return region;
+    }
 
+    public void setRegion(String region) {
+        this.region = region;
+    }
 
-
-	public void setConference(String conference) {
-		this.conference = conference;
-	}
-
-
-
-	public String getSection() {
-		return section;
-	}
-
-
-
-	public void setSection(String section) {
-		this.section = section;
-	}
-
-
-
-	public String getRegion() {
-		return region;
-	}
-
-
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-
-
-	@Override
+    @Override
     public String displayInfo() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

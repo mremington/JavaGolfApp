@@ -10,16 +10,17 @@ package golfApp.com;
  * @author michael.remington
  */
 public abstract class BasicInfo {
+
     private String name;
     private String phone;
     private String address;
 
-    public BasicInfo(String n, String ph, String add){
+    public BasicInfo(String n, String ph, String add) {
         setName(n);
         setPhone(ph);
         setAddress(add);
     }
-    
+
     /**
      * @return the name
      */
@@ -61,6 +62,6 @@ public abstract class BasicInfo {
     public void setAddress(String address) {
         this.address = address;
     }
-    
+
     public abstract String displayInfo();
 }

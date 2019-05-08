@@ -13,108 +13,206 @@ import java.util.Date;
  *
  * @author michael.remington
  */
-public class Match implements Calculatable{
+public class Match implements Calculatable {
+
     private School homeTeam;
     private School awayTeam;
-    private String[] matchTypes;
+    private String matchType;
     private Course course;
     private Date date;
-    private User[] players;
-    private Score[] scores;
+    private User[] homePlayers;
+    private Score[] homeScores;
+    private User[] awayPlayers;
+    private Score[] awayScores;
     private User medalist;
     private String result;
-    
-    
+
+    public Match(School h, School a, String type, Course c, Date d, User[] hplayers, Score[] hscores,User[] aplayers, Score[] ascores) {
+        setHomeTeam(h);
+        setAwayTeam(a);
+        setMatchType(type);
+        setCourse(c);
+        setDate(d);
+        setHomePlayers(hplayers);
+        setHomeScores(hscores);
+        setAwayPlayers(aplayers);
+        setAwayScores(ascores);
+
+        medalist = getHomePlayers()[3];
+        int bestScore = getHomeScores()[3].getStrokes();
+        for (User p : getHomePlayers()) {
+            for (Score s : getHomeScores()) {
+                if (p.equals(s.getPlayer()) && s.getStrokes() < bestScore) {
+                    bestScore = s.getStrokes();
+                    medalist = p;
+                }
+            }
+        }
+        for (User p : getAwayPlayers()) {
+            for (Score s : getAwayScores()) {
+                if (p.equals(s.getPlayer()) && s.getStrokes() < bestScore) {
+                    bestScore = s.getStrokes();
+                    medalist = p;
+                }
+            }
+        }
+        
+        setResult(compareScores().getName());
+
+    }
 
     public School getHomeTeam() {
-		return homeTeam;
-	}
+        return homeTeam;
+    }
 
-	public void setHomeTeam(School homeTeam) {
-		this.homeTeam = homeTeam;
-	}
+    public void setHomeTeam(School homeTeam) {
+        this.homeTeam = homeTeam;
+    }
 
-	public School getAwayTeam() {
-		return awayTeam;
-	}
+    public School getAwayTeam() {
+        return awayTeam;
+    }
 
-	public void setAwayTeam(School awayTeam) {
-		this.awayTeam = awayTeam;
-	}
+    public void setAwayTeam(School awayTeam) {
+        this.awayTeam = awayTeam;
+    }
 
-	public String[] getMatchTypes() {
-		return matchTypes;
-	}
+    public String getMatchType() {
+        return matchType;
+    }
 
-	public void setMatchTypes(String[] matchTypes) {
-		this.matchTypes = matchTypes;
-	}
+    public void setMatchType(String matchType) {
+        this.matchType = matchType;
+    }
 
-	public Course getCourse() {
-		return course;
-	}
+    public Course getCourse() {
+        return course;
+    }
 
-	public void setCourse(Course course) {
-		this.course = course;
-	}
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public User[] getPlayers() {
-		return players;
-	}
 
-	public void setPlayers(User[] players) {
-		this.players = players;
-	}
+    public User getMedalist() {
+        return medalist;
+    }
 
-	public Score[] getScores() {
-		return scores;
-	}
+    public void setMedalist(User medalist) {
+        this.medalist = medalist;
+    }
 
-	public void setScores(Score[] scores) {
-		this.scores = scores;
-	}
+    public String getResult() {
+        return result;
+    }
 
-	public User getMedalist() {
-		return medalist;
-	}
+    public void setResult(String result) {
+        this.result = result;
+    }
 
-	public void setMedalist(User medalist) {
-		this.medalist = medalist;
-	}
-
-	public String getResult() {
-		return result;
-	}
-
-	public void setResult(String result) {
-		this.result = result;
-	}
-
-	@Override
+    @Override
     public int calculateScores() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public int compareScores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public School compareScores() {
+        
+        int homeScore = 0;
+        int awayScore = 0;
+
+        for (User p : getHomePlayers()) {
+            for (Score s : getHomeScores()) {
+                homeScore+=s.getStrokes();
+            }
+        }
+        
+        for (User p : getAwayPlayers()) {
+            for (Score s : getAwayScores()) {
+                awayScore+=s.getStrokes();
+            }
+        }
+        
+
+
+        if(homeScore<awayScore)
+            return homeTeam;
+        else
+            return awayTeam;
+
     }
 
-	@Override
-	public void writeToFile(String path) throws IOException {
-	    String fileContent = "Match Text";
-	     
-	    FileWriter fileWriter = new FileWriter(path);
-	    fileWriter.write(fileContent);
-	    fileWriter.close();
-		
-	}
+    @Override
+    public void writeToFile(String path) throws IOException {
+        String fileContent = "Match Text";
+
+        FileWriter fileWriter = new FileWriter(path);
+        fileWriter.write(fileContent);
+        fileWriter.close();
+
+    }
+
+    /**
+     * @return the homePlayers
+     */
+    public User[] getHomePlayers() {
+        return homePlayers;
+    }
+
+    /**
+     * @param homePlayers the homePlayers to set
+     */
+    public void setHomePlayers(User[] homePlayers) {
+        this.homePlayers = homePlayers;
+    }
+
+    /**
+     * @return the homeScores
+     */
+    public Score[] getHomeScores() {
+        return homeScores;
+    }
+
+    /**
+     * @param homeScores the homeScores to set
+     */
+    public void setHomeScores(Score[] homeScores) {
+        this.homeScores = homeScores;
+    }
+
+    /**
+     * @return the awayPlayers
+     */
+    public User[] getAwayPlayers() {
+        return awayPlayers;
+    }
+
+    /**
+     * @param awayPlayers the awayPlayers to set
+     */
+    public void setAwayPlayers(User[] awayPlayers) {
+        this.awayPlayers = awayPlayers;
+    }
+
+    /**
+     * @return the awayScores
+     */
+    public Score[] getAwayScores() {
+        return awayScores;
+    }
+
+    /**
+     * @param awayScores the awayScores to set
+     */
+    public void setAwayScores(Score[] awayScores) {
+        this.awayScores = awayScores;
+    }
 }

@@ -12,7 +12,10 @@ import java.io.IOException;
  * @author michael.remington
  */
 public interface Calculatable {
+
     public int calculateScores();
-    public int compareScores();
+
+    public School compareScores();
+
     public void writeToFile(String path) throws IOException;
 }
