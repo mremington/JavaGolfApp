@@ -9,7 +9,7 @@ package golfApp.com;
  *
  * @author michael.remington
  */
-public class User extends BasicInfo {
+public class User extends BasicInfo implements Comparable {
 
     private String[] types = {"Player", "Coach", "AD", "Guest"};
     private String userType;
@@ -104,6 +104,17 @@ public class User extends BasicInfo {
      */
     public void setGender(String gender) {
         this.gender = gender;
+    }
+    
+     @Override
+    public int compareTo(Object o) {
+        School s = (School)o;
+       if(this.getName().compareTo(s.getName())<0)
+           return -1;
+       if(this.getName().compareTo(s.getName())>0)
+           return 1;
+       
+       return 0;
     }
     
     @Override

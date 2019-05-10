@@ -20,6 +20,10 @@ public class School extends BasicInfo implements Comparable {
     private Color secondaryColor;
     private String Division;
     private League league;
+    
+    public School(){
+        super("","","");
+    }
 
     public School(String n, String ph, String add) {
         super(n, ph, add);

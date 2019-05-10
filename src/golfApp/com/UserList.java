@@ -17,19 +17,40 @@ import java.util.Scanner;
  *
  * @author michael.remington
  */
-public class SchoolList implements CRUD {
+public class UserList implements CRUD {
 
-    private ArrayList<School> schools = new ArrayList<School>();
+    private ArrayList<User> users = new ArrayList<User>();
     private String fileContent;
 
     //load data from the school.dat file and fill the schools arraylist
-    public SchoolList() throws FileNotFoundException {
-        Scanner reader = new Scanner(new File("src/golfApp/com/schools.dat"));
+    public UserList() throws FileNotFoundException {
+        
+        SchoolList schools = new SchoolList();
+        ArrayList<School> schoolList = schools.getSchools();
+        School usersSchool = new School();
+        
+        Scanner reader = new Scanner(new File("src/golfApp/com/users.dat"));
         Scanner line = new Scanner("");
         while (reader.hasNext()) {
             String str = reader.nextLine();
             line = new Scanner(str);
-            schools.add(new School(line.next(), line.next(), line.next()));
+            String name = line.next();
+            String phone = line.next();
+            String address = line.next();
+            String type = line.next();
+            String un = line.next();
+            String pw = line.next();
+            String email = line.next();
+            String school = line.next();
+            String gender = line.next();
+            
+            for(School s:schoolList){
+                if(school.equals(s.getName())){
+                    usersSchool = s;
+                }
+            }
+            
+            users.add(new User(name,phone,address,type,un,pw,email,usersSchool, gender));
             //line.nextLine();
         }
         reader.close();
@@ -43,27 +64,27 @@ public class SchoolList implements CRUD {
         read();
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Enter new School information");
-        System.out.println("How many schools do you want to add?");
+        System.out.println("Enter new User information");
+        System.out.println("How many Users do you want to add?");
         int numSchools = input.nextInt();
         input.nextLine();
         boolean isNew = true;
         while (numSchools > 0 && isNew) {
-            System.out.println("Enter the new school name: ");
+            System.out.println("Enter the new User name: ");
             String name = input.nextLine();
 
-            for (School s : getSchools()) {
+            for (User s : getUsers()) {
                 if (s.getName().equals(name)) {
                     isNew = false;
                 }
             }
             if (isNew) {
-                School newSchool = new School(name, "#", "#");
-                getSchools().add(newSchool);
-                fileContent += newSchool.toString() + "\n";
+                User newUser = new User();
+                getUsers().add(newUser);
+                fileContent += newUser.toString() + "\n";
                 numSchools--;
             } else {
-                System.out.println("That School is already listed in data");
+                System.out.println("That User is already listed in data");
             }
 
         }
@@ -79,8 +100,8 @@ public class SchoolList implements CRUD {
     public void read() {
 
         fileContent = "";
-        Collections.sort(getSchools());
-        for (School s : getSchools()) {
+        Collections.sort(getUsers());
+        for (User s : getUsers()) {
             fileContent += s.toString() + "\n";
         }
 
@@ -94,49 +115,59 @@ public class SchoolList implements CRUD {
     public void update() throws FileNotFoundException, IOException {
         read();
 
-        School temp = new School("", "", "");
+        User temp = new User();
         String newSchoolName = "";
         String newSchoolPhone = "";
         String newSchoolAddress = "";
         String response = "";
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Update School information");
-        System.out.println("Which school would you like to update?");
+        System.out.println("Update User information");
+        System.out.println("Which User would you like to update?");
         String schoolName = input.nextLine();
 
-        for (int i = getSchools().size() - 1; i >= 0; i--) {
-            if (getSchools().get(i).getName().equals(schoolName)) {
-                temp = new School(getSchools().get(i).getName(), getSchools().get(i).getPhone(), getSchools().get(i).getAddress());
-                getSchools().remove(i);
+        for (int i = getUsers().size() - 1; i >= 0; i--) {
+            if (getUsers().get(i).getName().equals(schoolName)) {
+                temp = new User();
+                getUsers().remove(i);
             }
         }
         System.out.println(temp.toString());
 
         while (!response.equals("q")) {
-            System.out.println("What do you want to update? /n 1) Name, 2) Phone Number, 3) Address q) quit");
+            System.out.println("What do you want to update? /n "
+                    + "1) Name, "
+                    + "2) Phone Number, "
+                    + "3) Address "
+                    + "4) Type"
+                    + "5) User Name"
+                    + "6) Password"
+                    + "7) Email"
+                    + "8) School"
+                    + "9) Gender"
+                    + "q) quit");
             response = input.nextLine();
             if (response.equals("1")) {
-                System.out.println("Enter the name for the school?");
+                System.out.println("Enter the name for the User?");
                 newSchoolName = input.nextLine();
                 temp.setName(schoolName);
             }
             if (response.equals("2")) {
-                System.out.println("Enter the phone number for the school?");
+                System.out.println("Enter the phone number for the User?");
                 newSchoolPhone = input.nextLine();
                 temp.setPhone(newSchoolPhone);
             }
             if (response.equals("3")) {
-                System.out.println("Enter the address for the school?");
+                System.out.println("Enter the address for the User?");
                 newSchoolAddress = input.nextLine();
                 temp.setAddress(newSchoolAddress);
             }
         }
 
-        getSchools().add(temp);
+        getUsers().add(temp);
         fileContent = "";
-        Collections.sort(getSchools());
-        for (School s : getSchools()) {
+        Collections.sort(getUsers());
+        for (User s : getUsers()) {
             fileContent += s.toString() + "\n";
         }
         FileWriter fileWriter = new FileWriter("src/golfApp/com/schools.dat");
@@ -150,34 +181,34 @@ public class SchoolList implements CRUD {
     public void delete() throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Delete a school from the data");
-        System.out.println("Which school would you like to delete?");
-        String schoolName = input.nextLine();
+        System.out.println("Delete a User from the data");
+        System.out.println("Which User would you like to delete?");
+        String userName = input.nextLine();
 
-        for (int i = getSchools().size() - 1; i >= 0; i--) {
-            if (getSchools().get(i).getName().equals(schoolName)) {
-                getSchools().remove(i);
+        for (int i = getUsers().size() - 1; i >= 0; i--) {
+            if (getUsers().get(i).getName().equals(userName)) {
+                getUsers().remove(i);
             }
         }
 
-        System.out.println(schoolName + " has been deleted");
+        System.out.println(userName + " has been deleted");
         System.out.println("***********************");
         read();
 
     }
 
     /**
-     * @return the schools
+     * @return the users
      */
-    public ArrayList<School> getSchools() {
-        return schools;
+    public ArrayList<User> getUsers() {
+        return users;
     }
 
     /**
-     * @param schools the schools to set
+     * @param users the users to set
      */
-    public void setSchools(ArrayList<School> schools) {
-        this.schools = schools;
+    public void setUsers(ArrayList<User> users) {
+        this.users = users;
     }
 
 }
