@@ -12,7 +12,7 @@ import java.io.File;
  *
  * @author michael.remington
  */
-public class School extends BasicInfo {
+public class School extends BasicInfo implements Comparable {
 
     private String mascotName;
     private File mascotImage;
@@ -112,5 +112,20 @@ public class School extends BasicInfo {
      */
     public void setLeague(League league) {
         this.league = league;
+    }
+    
+    public String toString(){
+        return getName() +" "+ getPhone() +" "+ getAddress();
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        School s = (School)o;
+       if(this.getName().compareTo(s.getName())<0)
+           return -1;
+       if(this.getName().compareTo(s.getName())>0)
+           return 1;
+       
+       return 0;
     }
 }

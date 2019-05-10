@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author michael.remington
  */
-public class Match implements Calculatable {
+public class Match {
 
     private School homeTeam;
     private School awayTeam;
@@ -27,7 +27,7 @@ public class Match implements Calculatable {
     private User medalist;
     private String result;
 
-    public Match(School h, School a, String type, Course c, Date d, User[] hplayers, Score[] hscores,User[] aplayers, Score[] ascores) {
+    public Match(School h, School a, String type, Course c, Date d, User[] hplayers, Score[] hscores, User[] aplayers, Score[] ascores) {
         setHomeTeam(h);
         setAwayTeam(a);
         setMatchType(type);
@@ -56,8 +56,8 @@ public class Match implements Calculatable {
                 }
             }
         }
-        
-        setResult(compareScores().getName());
+
+        compareScores().getName();
 
     }
 
@@ -101,7 +101,6 @@ public class Match implements Calculatable {
         this.date = date;
     }
 
-
     public User getMedalist() {
         return medalist;
     }
@@ -115,48 +114,29 @@ public class Match implements Calculatable {
     }
 
     public void setResult(String result) {
-        this.result = result;
+        this.result = "The winner of the match is: " + result;
     }
 
-    @Override
-    public int calculateScores() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public School compareScores() {
-        
+
         int homeScore = 0;
         int awayScore = 0;
 
-        for (User p : getHomePlayers()) {
-            for (Score s : getHomeScores()) {
-                homeScore+=s.getStrokes();
-            }
+        for (Score s : getHomeScores()) {
+            homeScore += s.getStrokes();
         }
-        
-        for (User p : getAwayPlayers()) {
-            for (Score s : getAwayScores()) {
-                awayScore+=s.getStrokes();
-            }
+
+        for (Score s : getAwayScores()) {
+            awayScore += s.getStrokes();
         }
-        
 
-
-        if(homeScore<awayScore)
+        if (homeScore < awayScore) {
+            setResult(homeTeam.getName() + " with a score of " + homeScore + " to " + awayScore);
             return homeTeam;
-        else
+        } else {
+            setResult(awayTeam.getName() + " with a score of " + awayScore + " to " + homeScore);
             return awayTeam;
-
-    }
-
-    @Override
-    public void writeToFile(String path) throws IOException {
-        String fileContent = "Match Text";
-
-        FileWriter fileWriter = new FileWriter(path);
-        fileWriter.write(fileContent);
-        fileWriter.close();
+        }
 
     }
 

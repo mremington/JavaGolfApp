@@ -9,7 +9,7 @@ package golfApp.com;
  *
  * @author michael.remington
  */
-public class Score {
+public class Score implements Comparable {
 
     private User player;
     private Course course;
@@ -45,6 +45,7 @@ public class Score {
 
     public void setStrokes(int strokes) {
         this.strokes = strokes;
+        setIndex(getStrokes());
     }
 
     public double getIndex() {
@@ -60,6 +61,17 @@ public class Score {
     
     public String toString(){
         return getStrokes() + " index: " + String.format("%.2f", getIndex());
+    }
+
+    @Override
+    public int compareTo(Object o) {
+       Score s = (Score)o;
+       if(this.getIndex()<s.getIndex())
+           return -1;
+       else if(this.getIndex()>s.getIndex())
+           return 1;
+       
+       return 0;
     }
 
 }
