@@ -108,7 +108,7 @@ public class User extends BasicInfo implements Comparable {
     
      @Override
     public int compareTo(Object o) {
-        School s = (School)o;
+        User s = (User)o;
        if(this.getName().compareTo(s.getName())<0)
            return -1;
        if(this.getName().compareTo(s.getName())>0)
@@ -120,5 +120,10 @@ public class User extends BasicInfo implements Comparable {
     @Override
     public String displayInfo() {
         return getName() + " from " + getSchoolID().getName();
+    }
+    
+    @Override
+    public String toString() {
+        return getName() + " " + getPhone() + " " + getAddress() + " " + getUserType() + " " + getUserName() + " " + getPassword() + " " + getEmail() + " " + getSchoolID().getName() + " " + getGender();
     }
 }

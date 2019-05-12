@@ -21,13 +21,13 @@ public class UserList implements CRUD {
 
     private ArrayList<User> users = new ArrayList<User>();
     private String fileContent;
+    private SchoolList schools = new SchoolList();
+    private ArrayList<School> schoolList = schools.getSchools();
+    private School usersSchool = new School();
 
     //load data from the school.dat file and fill the schools arraylist
     public UserList() throws FileNotFoundException {
         
-        SchoolList schools = new SchoolList();
-        ArrayList<School> schoolList = schools.getSchools();
-        School usersSchool = new School();
         
         Scanner reader = new Scanner(new File("src/golfApp/com/users.dat"));
         Scanner line = new Scanner("");
@@ -66,12 +66,23 @@ public class UserList implements CRUD {
         Scanner input = new Scanner(System.in);
         System.out.println("Enter new User information");
         System.out.println("How many Users do you want to add?");
-        int numSchools = input.nextInt();
+        int numUsers = input.nextInt();
         input.nextLine();
+        Scanner line = new Scanner("");
         boolean isNew = true;
-        while (numSchools > 0 && isNew) {
-            System.out.println("Enter the new User name: ");
-            String name = input.nextLine();
+        while (numUsers > 0 && isNew) {
+            System.out.println("Enter the new User name, phone, address, type, userName, password, email, school, gender separated by spaces: ");
+            String str = input.nextLine();
+            line = new Scanner(str);
+            String name = line.next();
+            String phone = line.next();
+            String address = line.next();
+            String type = line.next();
+            String un = line.next();
+            String pw = line.next();
+            String email = line.next();
+            String school = line.next();
+            String gender = line.next();
 
             for (User s : getUsers()) {
                 if (s.getName().equals(name)) {
@@ -79,18 +90,22 @@ public class UserList implements CRUD {
                 }
             }
             if (isNew) {
-                User newUser = new User();
+            	for(School s:schoolList){
+                    if(school.equals(s.getName())){
+                        usersSchool = s;
+                    }
+                }
+                User newUser = new User(name,phone,address,type,un,pw,email,usersSchool,gender);
                 getUsers().add(newUser);
                 fileContent += newUser.toString() + "\n";
-                numSchools--;
+                numUsers--;
             } else {
                 System.out.println("That User is already listed in data");
             }
 
         }
-        //input.close();
 
-        FileWriter fileWriter = new FileWriter("src/golfApp/com/schools.dat");
+        FileWriter fileWriter = new FileWriter("src/golfApp/com/users.dat");
         fileWriter.write(fileContent);
         fileWriter.close();
     }
@@ -170,7 +185,7 @@ public class UserList implements CRUD {
         for (User s : getUsers()) {
             fileContent += s.toString() + "\n";
         }
-        FileWriter fileWriter = new FileWriter("src/golfApp/com/schools.dat");
+        FileWriter fileWriter = new FileWriter("src/golfApp/com/users.dat");
         fileWriter.write(fileContent);
         fileWriter.close();
 
