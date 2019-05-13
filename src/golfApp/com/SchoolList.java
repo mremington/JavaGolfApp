@@ -30,10 +30,10 @@ public class SchoolList implements CRUD {
             String str = reader.nextLine();
             line = new Scanner(str);
             schools.add(new School(line.next(), line.next(), line.next()));
-            //line.nextLine();
         }
-        reader.close();
-        line.close();
+       reader.close();
+       line.close();
+       
     }
 
     //read the existing school data, create a new school object if it is new, write all school data to file

@@ -27,34 +27,29 @@ public class UserList implements CRUD {
 
     //load data from the school.dat file and fill the schools arraylist
     public UserList() throws FileNotFoundException {
-        
-        
-        Scanner reader = new Scanner(new File("src/golfApp/com/users.dat"));
-        Scanner line = new Scanner("");
-        while (reader.hasNext()) {
-            String str = reader.nextLine();
-            line = new Scanner(str);
-            String name = line.next();
-            String phone = line.next();
-            String address = line.next();
-            String type = line.next();
-            String un = line.next();
-            String pw = line.next();
-            String email = line.next();
-            String school = line.next();
-            String gender = line.next();
-            
-            for(School s:schoolList){
-                if(school.equals(s.getName())){
-                    usersSchool = s;
-                }
+
+        Scanner readUsers = new Scanner(new File("src/golfApp/com/users.dat"));
+        Scanner userInfo = new Scanner("");
+        while (readUsers.hasNext()) {
+            String str = readUsers.nextLine();
+            //System.out.println(str);
+            userInfo = new Scanner(str);
+            if (userInfo.hasNext()) {
+                users.add(new User(userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), getSchool(userInfo.next()), userInfo.next()));
             }
-            
-            users.add(new User(name,phone,address,type,un,pw,email,usersSchool, gender));
-            //line.nextLine();
         }
-        reader.close();
-        line.close();
+        readUsers.close();
+        userInfo.close();
+
+    }
+
+    public School getSchool(String schoolName) {
+        for (School s : schoolList) {
+            if (schoolName.equals(s.getName())) {
+                return s;
+            }
+        }
+        return new School();
     }
 
     //read the existing school data, create a new school object if it is new, write all school data to file
@@ -90,12 +85,8 @@ public class UserList implements CRUD {
                 }
             }
             if (isNew) {
-            	for(School s:schoolList){
-                    if(school.equals(s.getName())){
-                        usersSchool = s;
-                    }
-                }
-                User newUser = new User(name,phone,address,type,un,pw,email,usersSchool,gender);
+                usersSchool = getSchool(school);
+                User newUser = new User(name, phone, address, type, un, pw, email, usersSchool, gender);
                 getUsers().add(newUser);
                 fileContent += newUser.toString() + "\n";
                 numUsers--;
@@ -131,19 +122,33 @@ public class UserList implements CRUD {
         read();
 
         User temp = new User();
-        String newSchoolName = "";
-        String newSchoolPhone = "";
-        String newSchoolAddress = "";
+        String newUserName = "";
+        String newUserPhone = "";
+        String newUserAddress = "";
+        String newUserType = "";
+        String newUserUN = "";
+        String newUserPW = "";
+        String newUserEmail = "";
+        String newUserSchool = "";
+        String newUserGender = "";
         String response = "";
 
         Scanner input = new Scanner(System.in);
         System.out.println("Update User information");
         System.out.println("Which User would you like to update?");
-        String schoolName = input.nextLine();
+        String userName = input.nextLine();
 
         for (int i = getUsers().size() - 1; i >= 0; i--) {
-            if (getUsers().get(i).getName().equals(schoolName)) {
-                temp = new User();
+            if (getUsers().get(i).getName().equals(userName)) {
+                temp = new User(getUsers().get(i).getName(), 
+                        getUsers().get(i).getPhone(), 
+                        getUsers().get(i).getAddress(), 
+                        getUsers().get(i).getUserType(), 
+                        getUsers().get(i).getUserName(), 
+                        getUsers().get(i).getPassword(), 
+                        getUsers().get(i).getEmail(), 
+                        getUsers().get(i).getSchoolID(), 
+                        getUsers().get(i).getGender());
                 getUsers().remove(i);
             }
         }
@@ -154,28 +159,58 @@ public class UserList implements CRUD {
                     + "1) Name, "
                     + "2) Phone Number, "
                     + "3) Address "
-                    + "4) Type"
-                    + "5) User Name"
-                    + "6) Password"
-                    + "7) Email"
-                    + "8) School"
-                    + "9) Gender"
-                    + "q) quit");
+                    + "4) Type "
+                    + "5) User Name "
+                    + "6) Password "
+                    + "7) Email "
+                    + "8) School "
+                    + "9) Gender "
+                    + "q) quit ");
             response = input.nextLine();
             if (response.equals("1")) {
                 System.out.println("Enter the name for the User?");
-                newSchoolName = input.nextLine();
-                temp.setName(schoolName);
+                newUserName = input.nextLine();
+                temp.setName(userName);
             }
             if (response.equals("2")) {
                 System.out.println("Enter the phone number for the User?");
-                newSchoolPhone = input.nextLine();
-                temp.setPhone(newSchoolPhone);
+                newUserPhone = input.nextLine();
+                temp.setPhone(newUserPhone);
             }
             if (response.equals("3")) {
                 System.out.println("Enter the address for the User?");
-                newSchoolAddress = input.nextLine();
-                temp.setAddress(newSchoolAddress);
+                newUserAddress = input.nextLine();
+                temp.setAddress(newUserAddress);
+            }
+            if (response.equals("4")) {
+                System.out.println("Enter the Type for the User?");
+                newUserType = input.nextLine();
+                temp.setUserType(newUserType);
+            }
+            if (response.equals("5")) {
+                System.out.println("Enter the User Name for the User?");
+                newUserUN = input.nextLine();
+                temp.setUserName(newUserUN);
+            }
+            if (response.equals("6")) {
+                System.out.println("Enter the Password for the User?");
+                newUserPW = input.nextLine();
+                temp.setPassword(newUserPW);
+            }
+            if (response.equals("7")) {
+                System.out.println("Enter the Email for the User?");
+                newUserEmail = input.nextLine();
+                temp.setEmail(newUserEmail);
+            }
+            if (response.equals("8")) {
+                System.out.println("Enter the School for the User?");
+                newUserSchool = input.nextLine();
+                temp.setSchoolID(getSchool(newUserSchool));
+            }
+            if (response.equals("9")) {
+                System.out.println("Enter the Gender for the User?");
+                newUserGender = input.nextLine();
+                temp.setGender(newUserGender);
             }
         }
 
