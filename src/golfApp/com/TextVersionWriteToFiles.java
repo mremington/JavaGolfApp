@@ -23,9 +23,9 @@ public class TextVersionWriteToFiles {
         String response = "";
         Scanner input = new Scanner(System.in);
         System.out.println("High School Golf Scoring Application");
-        System.out.println("Enter 1) School Menu, 2) User Menu or q to quit");
+        System.out.println("Enter 1) School Menu, 2) User Menu or \"Quit\" to exit");
         response = input.nextLine();
-        while (!response.equals("q")) {
+        while (!response.equals("Quit")) {
             if (response.equals("1")) {
                 while (!response.equals("q")) {
                     System.out.println("School Information Menu");
@@ -62,6 +62,11 @@ public class TextVersionWriteToFiles {
                         userInfo.delete();
                     }
                 }
+            }
+            else{
+                System.out.println("Enter a response from the Applicaiton Menu");
+                System.out.println("Enter 1) School Menu, 2) User Menu or \"Quit\" to exit");
+                response = input.nextLine();
             }
         }
 

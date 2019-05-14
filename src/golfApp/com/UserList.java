@@ -79,8 +79,8 @@ public class UserList implements CRUD {
             String school = line.next();
             String gender = line.next();
 
-            for (User s : getUsers()) {
-                if (s.getName().equals(name)) {
+            for (User u : getUsers()) {
+                if (u.getName().equals(name)) {
                     isNew = false;
                 }
             }
@@ -107,8 +107,8 @@ public class UserList implements CRUD {
 
         fileContent = "";
         Collections.sort(getUsers());
-        for (User s : getUsers()) {
-            fileContent += s.toString() + "\n";
+        for (User u : getUsers()) {
+            fileContent += u.toString() + "\n";
         }
 
         System.out.println(fileContent);
@@ -217,8 +217,8 @@ public class UserList implements CRUD {
         getUsers().add(temp);
         fileContent = "";
         Collections.sort(getUsers());
-        for (User s : getUsers()) {
-            fileContent += s.toString() + "\n";
+        for (User u : getUsers()) {
+            fileContent += u.toString() + "\n";
         }
         FileWriter fileWriter = new FileWriter("src/golfApp/com/users.dat");
         fileWriter.write(fileContent);

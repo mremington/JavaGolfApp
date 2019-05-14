@@ -9,7 +9,7 @@ package golfApp.com;
  *
  * @author michael.remington
  */
-public class League extends BasicInfo {
+public class League extends BasicInfo implements Comparable {
 
     private User representative;
     private String conference;
@@ -18,6 +18,13 @@ public class League extends BasicInfo {
 
     public League(String n, String ph, String add) {
         super(n, ph, add);
+    }
+
+    public League(String n, String ph, String add, User rep, String con, String sec, String reg) {
+        super(n, ph, add);
+        setRepresentative(rep);
+        setConference(con);
+        setRegion(reg);
     }
 
     public User getRepresentative() {
@@ -50,6 +57,24 @@ public class League extends BasicInfo {
 
     public void setRegion(String region) {
         this.region = region;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        League s = (League) o;
+        if (this.getName().compareTo(s.getName()) < 0) {
+            return -1;
+        }
+        if (this.getName().compareTo(s.getName()) > 0) {
+            return 1;
+        }
+
+        return 0;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getPhone() + " " + getAddress() + " " + getRepresentative() + " " + getConference() + " " + getSection() + " " + getRegion();
     }
 
     @Override
