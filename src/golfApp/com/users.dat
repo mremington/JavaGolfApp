@@ -1,3 +1,6 @@
+Lockhart # # coach cn1 cp1 # CCA m
+coach2 # # coach cn2 cp2 # TP m
+coach3 # # coach cn3 cp3 # LCC m
 player1 # # player p1 pw1 # CCA m
 player2 # # player p2 pw2 # CCA m
 player3 # # player p3 pw3 # CCA m
@@ -5,5 +8,3 @@ player4 # # player p4 pw4 # CCA m
 player5 888-888-8888 # player p5 pw5 # CCA m
 player6 777-777-7777 # player p6 pw6 # TP m
 player7 # # player p7 pw7 # CCA m
-coach1 # # coach cn1 cp1 # CCA m
-coach2 # # coach cn2 cp2 # TP m

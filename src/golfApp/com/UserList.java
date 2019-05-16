@@ -24,18 +24,18 @@ public class UserList implements CRUD {
     private SchoolList schools = new SchoolList();
     private ArrayList<School> schoolList = schools.getSchools();
     private School usersSchool = new School();
-
+    private Scanner userInfo = new Scanner("");
     //load data from the school.dat file and fill the schools arraylist
     public UserList() throws FileNotFoundException {
 
         Scanner readUsers = new Scanner(new File("src/golfApp/com/users.dat"));
-        Scanner userInfo = new Scanner("");
         while (readUsers.hasNext()) {
             String str = readUsers.nextLine();
-            //System.out.println(str);
             userInfo = new Scanner(str);
+            System.out.println(str);
             if (userInfo.hasNext()) {
-                users.add(new User(userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), getSchool(userInfo.next()), userInfo.next()));
+                User newUser = new User(userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), userInfo.next(), getSchool(userInfo.next()), userInfo.next());
+                users.add(newUser);
             }
         }
         readUsers.close();
@@ -170,7 +170,7 @@ public class UserList implements CRUD {
             if (response.equals("1")) {
                 System.out.println("Enter the name for the User?");
                 newUserName = input.nextLine();
-                temp.setName(userName);
+                temp.setName(newUserName);
             }
             if (response.equals("2")) {
                 System.out.println("Enter the phone number for the User?");
