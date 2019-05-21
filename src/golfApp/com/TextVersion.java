@@ -15,7 +15,7 @@ import java.util.Date;
 public class TextVersion {
 
     public static void main(String[] args) {
-
+        
         School school = new School("defaultSchool", "defaultPH", "defaultAddress");
 
         User player = new User("playerName", "dfPhone", "dfAddress", "player", "playerUn", "playerPw", "playerEmail", school, "male");
