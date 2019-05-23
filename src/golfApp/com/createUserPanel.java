@@ -7,6 +7,7 @@ package golfApp.com;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -23,6 +24,9 @@ public class createUserPanel extends javax.swing.JPanel {
         initComponents();
         schools = new SchoolList();
         schoolList = schools.getSchools();
+        String[] schoolNames = new String[schoolList.size()];
+        DefaultComboBoxModel model = new DefaultComboBoxModel(schoolNames);
+        schoolComboBx.setModel(model);
     }
 
     /**
@@ -132,7 +136,6 @@ public class createUserPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(genderLbl)
                                 .addGap(15, 15, 15)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(createUserBtn)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
