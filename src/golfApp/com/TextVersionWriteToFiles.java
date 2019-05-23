@@ -19,11 +19,12 @@ public class TextVersionWriteToFiles {
 
         SchoolList schoolInfo = new SchoolList();
         UserList userInfo = new UserList();
+        LeagueList leagueInfo = new LeagueList();
 
         String response = "";
         Scanner input = new Scanner(System.in);
         System.out.println("High School Golf Scoring Application");
-        System.out.println("Enter 1) School Menu, 2) User Menu or \"Quit\" to exit");
+        System.out.println("Enter 1) School Menu, 2) User Menu, 3) League Menu or \"Quit\" to exit");
         response = input.nextLine();
         while (!response.equals("Quit")) {
             if (response.equals("1")) {
@@ -60,6 +61,24 @@ public class TextVersionWriteToFiles {
                     }
                     if (response.equals("d")) {
                         userInfo.delete();
+                    }
+                }
+            }else if (response.equals("3")) {
+                while (!response.equals("q")) {
+                    System.out.println("League Information Menu");
+                    System.out.println("Enter c) Create, r)Read, u)update, d)delete, q)quit");
+                    response = input.nextLine();
+                    if (response.equals("c")) {
+                        leagueInfo.create();
+                    }
+                    if (response.equals("r")) {
+                        leagueInfo.read();
+                    }
+                    if (response.equals("u")) {
+                        leagueInfo.update();
+                    }
+                    if (response.equals("d")) {
+                        leagueInfo.delete();
                     }
                 }
             }

@@ -21,7 +21,8 @@ public class LeagueList implements CRUD {
 
     private ArrayList<League> leagues = new ArrayList<League>();
     private String fileContent;
-    private ArrayList<User> users = new ArrayList<User>();
+    private UserList users = new UserList();
+    private ArrayList<User> userList = users.getUsers();
     private User leagueRep = new User();
 
     //load data from the school.dat file and fill the schools arraylist
@@ -39,12 +40,12 @@ public class LeagueList implements CRUD {
     }
 
     public User getRep(String repName) {
-        for (User u : users) {
+        for (User u : userList) {
             if (repName.equals(u.getName())) {
-                return u;
+                leagueRep = u;
             }
         }
-        return new User();
+        return leagueRep;
     }
 
     //read the existing school data, create a new school object if it is new, write all school data to file
@@ -109,6 +110,10 @@ public class LeagueList implements CRUD {
         String newLeagueName = "";
         String newLeaguePhone = "";
         String newLeagueAddress = "";
+        String newLeagueRep = "";
+        String newConference = "";
+        String newSection = "";
+        String newRegion = "";
         String response = "";
 
         Scanner input = new Scanner(System.in);
@@ -126,7 +131,7 @@ public class LeagueList implements CRUD {
                         getLeagues().get(i).getSection(),
                         getLeagues().get(i).getRegion());
                 
-                getLeagues().remove(i);
+                        getLeagues().remove(i);
             }
         }
         System.out.println(temp.toString());
@@ -139,7 +144,8 @@ public class LeagueList implements CRUD {
                     + "4) League Rep "
                     + "5) Conference "
                     + "6) Section "
-                    + "7) Region ");
+                    + "7) Region "
+                    + "q) Exit League Update menu ");
             response = input.nextLine();
             if (response.equals("1")) {
                 System.out.println("Enter the name for the league?");
@@ -155,6 +161,26 @@ public class LeagueList implements CRUD {
                 System.out.println("Enter the address for the league?");
                 newLeagueAddress = input.nextLine();
                 temp.setAddress(newLeagueAddress);
+            }
+             if (response.equals("4")) {
+                System.out.println("Enter the Name for the League Rep?");
+                newLeagueRep = input.nextLine();
+                temp.setRepresentative(getRep(newLeagueRep));
+            }
+             if (response.equals("5")) {
+                System.out.println("Enter the Conference the league is in:");
+                newConference = input.nextLine();
+                temp.setConference(newConference);
+            }
+              if (response.equals("6")) {
+                System.out.println("Enter the Section the league is in:");
+                newSection = input.nextLine();
+                temp.setSection(newSection);
+            }
+              if (response.equals("7")) {
+                System.out.println("Enter the Region the league is in:");
+                newRegion = input.nextLine();
+                temp.setRegion(newRegion);
             }
         }
 
@@ -175,8 +201,8 @@ public class LeagueList implements CRUD {
     public void delete() throws FileNotFoundException {
 
         Scanner input = new Scanner(System.in);
-        System.out.println("Delete a school from the data");
-        System.out.println("Which school would you like to delete?");
+        System.out.println("Delete a league from the data");
+        System.out.println("Which league would you like to delete?");
         String leagueName = input.nextLine();
 
         for (int i = getLeagues().size() - 1; i >= 0; i--) {
@@ -188,7 +214,6 @@ public class LeagueList implements CRUD {
         System.out.println(leagueName + " has been deleted");
         System.out.println("***********************");
         read();
-
     }
 
     /**

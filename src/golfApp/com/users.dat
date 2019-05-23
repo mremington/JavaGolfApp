@@ -1,6 +1,7 @@
 Lockhart # # coach cn1 cp1 # CCA m
 coach2 # # coach cn2 cp2 # TP m
 coach3 # # coach cn3 cp3 # LCC m
+coach # # coach def def # def def
 player1 # # player p1 pw1 # CCA m
 player2 # # player p2 pw2 # CCA m
 player3 # # player p3 pw3 # CCA m

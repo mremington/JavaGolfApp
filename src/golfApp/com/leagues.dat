@@ -1,2 +1,6 @@
-AvacadoWest # # coach1 div1 SanDiego Southern
-Palomar # # coach2 div1 SanDiego Southern
+AvacadoWest # # coach3 # # coach cn3 cp3 # LCC m # null coach
+Palomar # # coach3 # # coach cn3 cp3 # LCC m # null coach
+Test # # coach3 # # coach cn3 cp3 # LCC m # null coach
+Test2 # # coach # # coach def def #  def div null #
+Test3 # # coach # # coach def def #  def div null #
+AvacadoEast # # coach # # coach def def #  def div null #
