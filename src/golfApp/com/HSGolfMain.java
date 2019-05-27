@@ -5,30 +5,27 @@
  */
 package golfApp.com;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.JPanel;
 
 /**
  *
- * @author michael.remington
+ * @author mike
  */
 public class HSGolfMain extends javax.swing.JFrame {
-
-    private UserList users;
-    private ArrayList<User> userList;
+    
+    private HSGolfSubPanel subPanel;
 
     /**
      * Creates new form HSGolfMain
      */
-    public HSGolfMain() throws FileNotFoundException {
+    public HSGolfMain() {
         initComponents();
-        users = new UserList();
-        userList = users.getUsers();
-        loginMessageLbl.setVisible(false);
-    }
+        subPanel = new HSGolfSubPanel();
+        subPanel.setBounds(0,150,getWidth(),getHeight());
+        subPanel.setVisible(false);
+        add(subPanel);
 
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,127 +36,136 @@ public class HSGolfMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        loginPanel = new javax.swing.JPanel();
+        mainPnl = new javax.swing.JPanel();
         mainTitleLbl = new javax.swing.JLabel();
-        userNameLbl = new javax.swing.JLabel();
-        userNameTxtFld = new javax.swing.JTextField();
-        passwordLbl = new javax.swing.JLabel();
-        passwordTxtFld = new javax.swing.JTextField();
-        loginBtn = new javax.swing.JButton();
-        loginMessageLbl = new javax.swing.JLabel();
+        schoolMenuBtn = new javax.swing.JRadioButton();
+        userMenuBtn = new javax.swing.JRadioButton();
+        leagueMenuBtn = new javax.swing.JRadioButton();
+        menuLaunchBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        loginPanel.setBackground(new java.awt.Color(204, 255, 204));
+        mainPnl.setPreferredSize(new java.awt.Dimension(800, 600));
 
         mainTitleLbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        mainTitleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mainTitleLbl.setText("High School Golf Scoring System");
-        mainTitleLbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        mainTitleLbl.setText("High School Golf Application");
 
-        userNameLbl.setBackground(new java.awt.Color(204, 255, 204));
-        userNameLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        userNameLbl.setText("UserName");
-
-        userNameTxtFld.setBackground(new java.awt.Color(204, 255, 204));
-
-        passwordLbl.setBackground(new java.awt.Color(204, 255, 204));
-        passwordLbl.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        passwordLbl.setText("Password");
-
-        passwordTxtFld.setBackground(new java.awt.Color(204, 255, 204));
-
-        loginBtn.setBackground(new java.awt.Color(204, 255, 204));
-        loginBtn.setText("Log-In");
-        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+        schoolMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        schoolMenuBtn.setText("School Menu");
+        schoolMenuBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginBtnActionPerformed(evt);
+                schoolMenuBtnActionPerformed(evt);
             }
         });
 
-        loginMessageLbl.setText("Enter a valid user name and password");
+        userMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        userMenuBtn.setText(" User Menu");
+        userMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userMenuBtnActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout loginPanelLayout = new javax.swing.GroupLayout(loginPanel);
-        loginPanel.setLayout(loginPanelLayout);
-        loginPanelLayout.setHorizontalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addComponent(mainTitleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(loginPanelLayout.createSequentialGroup()
-                                        .addComponent(passwordLbl)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(passwordTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(loginPanelLayout.createSequentialGroup()
-                                        .addComponent(userNameLbl)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(userNameTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(loginPanelLayout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(loginBtn)))
-                                .addGap(172, 172, 172))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loginPanelLayout.createSequentialGroup()
-                                .addComponent(loginMessageLbl)
-                                .addGap(134, 134, 134))))))
+        leagueMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        leagueMenuBtn.setText("League Menu");
+        leagueMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leagueMenuBtnActionPerformed(evt);
+            }
+        });
+
+        menuLaunchBtn.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        menuLaunchBtn.setText("Launch Selected Menu");
+        menuLaunchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLaunchBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout mainPnlLayout = new javax.swing.GroupLayout(mainPnl);
+        mainPnl.setLayout(mainPnlLayout);
+        mainPnlLayout.setHorizontalGroup(
+            mainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPnlLayout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(schoolMenuBtn)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addComponent(userMenuBtn)
+                .addGap(65, 65, 65)
+                .addComponent(leagueMenuBtn)
+                .addGap(73, 73, 73))
+            .addGroup(mainPnlLayout.createSequentialGroup()
+                .addGroup(mainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(mainPnlLayout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(mainTitleLbl))
+                    .addGroup(mainPnlLayout.createSequentialGroup()
+                        .addGap(251, 251, 251)
+                        .addComponent(menuLaunchBtn)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        loginPanelLayout.setVerticalGroup(
-            loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(loginPanelLayout.createSequentialGroup()
-                .addComponent(mainTitleLbl)
-                .addGap(18, 18, 18)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(userNameLbl)
-                    .addComponent(userNameTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        mainPnlLayout.setVerticalGroup(
+            mainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(mainPnlLayout.createSequentialGroup()
+                .addGroup(mainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(mainTitleLbl)
+                    .addGroup(mainPnlLayout.createSequentialGroup()
+                        .addGap(57, 57, 57)
+                        .addGroup(mainPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(schoolMenuBtn)
+                            .addComponent(userMenuBtn)
+                            .addComponent(leagueMenuBtn))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(passwordLbl)
-                    .addComponent(passwordTxtFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(loginBtn)
-                .addGap(18, 18, 18)
-                .addComponent(loginMessageLbl)
-                .addGap(0, 27, Short.MAX_VALUE))
+                .addComponent(menuLaunchBtn))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(mainPnl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(mainPnl, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 460, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+    private void menuLaunchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLaunchBtnActionPerformed
         // TODO add your handling code here:
-
-        for(User u: userList){
-            if(u.getUserName().equals(userNameTxtFld.getText()) && u.getPassword().equals(passwordTxtFld.getText())){
-                loginMessageLbl.setText("welcome " + u.getUserType() + " " + u.getName());
-                loginMessageLbl.setVisible(true);
-            }else
-            loginMessageLbl.setVisible(true);
+        if(schoolMenuBtn.isSelected()){
+            subPanel.setSubTitle("School Information Menu");
+            subPanel.setVisible(true);
+        }else if(userMenuBtn.isSelected()){
+            subPanel.setSubTitle("User Information Menu");
+            subPanel.setVisible(true);
+        }else if(leagueMenuBtn.isSelected()){
+            subPanel.setSubTitle("League Information Menu");
+            subPanel.setVisible(true);
         }
+    }//GEN-LAST:event_menuLaunchBtnActionPerformed
 
-    }//GEN-LAST:event_loginBtnActionPerformed
+    private void schoolMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_schoolMenuBtnActionPerformed
+        // TODO add your handling code here:
+        userMenuBtn.setSelected(false);
+        leagueMenuBtn.setSelected(false);
+    }//GEN-LAST:event_schoolMenuBtnActionPerformed
+
+    private void userMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userMenuBtnActionPerformed
+        // TODO add your handling code here:
+        schoolMenuBtn.setSelected(false);
+        leagueMenuBtn.setSelected(false);
+    }//GEN-LAST:event_userMenuBtnActionPerformed
+
+    private void leagueMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leagueMenuBtnActionPerformed
+        // TODO add your handling code here:
+        userMenuBtn.setSelected(false);
+        schoolMenuBtn.setSelected(false);
+    }//GEN-LAST:event_leagueMenuBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,27 +197,17 @@ public class HSGolfMain extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new HSGolfMain().setVisible(true);
-                } catch (FileNotFoundException ex) {
-                    Logger.getLogger(HSGolfMain.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new HSGolfMain().setVisible(true);
             }
         });
-        
-        
-
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton loginBtn;
-    private javax.swing.JLabel loginMessageLbl;
-    private javax.swing.JPanel loginPanel;
+    private javax.swing.JRadioButton leagueMenuBtn;
+    private javax.swing.JPanel mainPnl;
     private javax.swing.JLabel mainTitleLbl;
-    private javax.swing.JLabel passwordLbl;
-    private javax.swing.JTextField passwordTxtFld;
-    private javax.swing.JLabel userNameLbl;
-    private javax.swing.JTextField userNameTxtFld;
+    private javax.swing.JButton menuLaunchBtn;
+    private javax.swing.JRadioButton schoolMenuBtn;
+    private javax.swing.JRadioButton userMenuBtn;
     // End of variables declaration//GEN-END:variables
 }
