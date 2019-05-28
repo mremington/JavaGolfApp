@@ -5,6 +5,7 @@
  */
 package golfApp.com;
 
+import java.awt.Graphics;
 import javax.swing.JPanel;
 
 /**
@@ -12,8 +13,10 @@ import javax.swing.JPanel;
  * @author mike
  */
 public class HSGolfMain extends javax.swing.JFrame {
-    
+
     private HSGolfSubPanel subPanel;
+    private static DisplayInfoPnl displayPanel;
+    private static String displayType;
 
     /**
      * Creates new form HSGolfMain
@@ -21,10 +24,16 @@ public class HSGolfMain extends javax.swing.JFrame {
     public HSGolfMain() {
         initComponents();
         subPanel = new HSGolfSubPanel();
-        subPanel.setBounds(0,150,getWidth(),getHeight());
+        subPanel.setBounds(0, 150, getWidth(), getHeight());
         subPanel.setVisible(false);
         add(subPanel);
 
+        displayPanel = new DisplayInfoPnl();
+        displayPanel.setBounds(0, 0, getWidth(), getHeight());
+        displayPanel.setVisible(false);
+        add(displayPanel);
+
+        displayType = "";
     }
 
     /**
@@ -137,13 +146,13 @@ public class HSGolfMain extends javax.swing.JFrame {
 
     private void menuLaunchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLaunchBtnActionPerformed
         // TODO add your handling code here:
-        if(schoolMenuBtn.isSelected()){
+        if (schoolMenuBtn.isSelected()) {
             subPanel.setSubTitle("School Information Menu");
             subPanel.setVisible(true);
-        }else if(userMenuBtn.isSelected()){
+        } else if (userMenuBtn.isSelected()) {
             subPanel.setSubTitle("User Information Menu");
             subPanel.setVisible(true);
-        }else if(leagueMenuBtn.isSelected()){
+        } else if (leagueMenuBtn.isSelected()) {
             subPanel.setSubTitle("League Information Menu");
             subPanel.setVisible(true);
         }
@@ -166,6 +175,25 @@ public class HSGolfMain extends javax.swing.JFrame {
         userMenuBtn.setSelected(false);
         schoolMenuBtn.setSelected(false);
     }//GEN-LAST:event_leagueMenuBtnActionPerformed
+
+    public static void setDisplayType(String s) {
+        displayType = s;
+    }
+
+    public static String getDisplayType() {
+        return displayType;
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g); //To change body of generated methods, choose Tools | Templates.
+        if (subPanel.getOperation().equals("read")) {
+            mainPnl.setVisible(false);
+            subPanel.setVisible(false);
+            displayPanel.setVisible(true);
+        }
+        repaint();
+    }
 
     /**
      * @param args the command line arguments

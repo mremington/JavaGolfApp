@@ -11,11 +11,16 @@ package golfApp.com;
  */
 public class HSGolfSubPanel extends javax.swing.JPanel {
 
+    private String operation;
+    
+    
     /**
      * Creates new form HSGolfSubPanel
      */
     public HSGolfSubPanel() {
         initComponents();
+        operation = "";
+        
     }
     
      
@@ -37,7 +42,7 @@ public class HSGolfSubPanel extends javax.swing.JPanel {
         updateMenuBtn = new javax.swing.JRadioButton();
         readMenuBtn = new javax.swing.JRadioButton();
         deleteMenuBtn = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
+        launchAdminBtn = new javax.swing.JButton();
 
         subTitleLbl.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         subTitleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -45,18 +50,43 @@ public class HSGolfSubPanel extends javax.swing.JPanel {
 
         createMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         createMenuBtn.setText("Create");
+        createMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createMenuBtnActionPerformed(evt);
+            }
+        });
 
         updateMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         updateMenuBtn.setText("Update");
+        updateMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateMenuBtnActionPerformed(evt);
+            }
+        });
 
         readMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         readMenuBtn.setText("Read");
+        readMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                readMenuBtnActionPerformed(evt);
+            }
+        });
 
         deleteMenuBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         deleteMenuBtn.setText("Delete");
+        deleteMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteMenuBtnActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Launch Admin Operation");
+        launchAdminBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        launchAdminBtn.setText("Launch Admin Operation");
+        launchAdminBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                launchAdminBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -72,7 +102,7 @@ public class HSGolfSubPanel extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jButton1)
+                        .addComponent(launchAdminBtn)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(readMenuBtn)
@@ -94,16 +124,67 @@ public class HSGolfSubPanel extends javax.swing.JPanel {
                     .addComponent(readMenuBtn)
                     .addComponent(deleteMenuBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(launchAdminBtn)
                 .addGap(0, 167, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void createMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createMenuBtnActionPerformed
+        // TODO add your handling code here:
+        deleteMenuBtn.setSelected(false);
+        updateMenuBtn.setSelected(false);
+        readMenuBtn.setSelected(false);
+         
+    }//GEN-LAST:event_createMenuBtnActionPerformed
 
+    private void readMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_readMenuBtnActionPerformed
+        // TODO add your handling code here:
+        deleteMenuBtn.setSelected(false);
+        updateMenuBtn.setSelected(false);
+        createMenuBtn.setSelected(false);
+    }//GEN-LAST:event_readMenuBtnActionPerformed
+
+    private void updateMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateMenuBtnActionPerformed
+        // TODO add your handling code here:
+        deleteMenuBtn.setSelected(false);
+        readMenuBtn.setSelected(false);
+        createMenuBtn.setSelected(false);
+    }//GEN-LAST:event_updateMenuBtnActionPerformed
+
+    private void deleteMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteMenuBtnActionPerformed
+        // TODO add your handling code here:
+        readMenuBtn.setSelected(false);
+        updateMenuBtn.setSelected(false);
+        createMenuBtn.setSelected(false);
+    }//GEN-LAST:event_deleteMenuBtnActionPerformed
+
+    private void launchAdminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_launchAdminBtnActionPerformed
+        // TODO add your handling code here:
+        if(readMenuBtn.isSelected()){
+           setOperation("read");
+           HSGolfMain.setDisplayType("read");
+        }else if(createMenuBtn.isSelected()){
+            setOperation("create");
+        }else if(updateMenuBtn.isSelected()){
+            setOperation("update");
+        }else if(deleteMenuBtn.isSelected()){
+            setOperation("delete");
+        }
+        
+    }//GEN-LAST:event_launchAdminBtnActionPerformed
+
+    public String getOperation(){
+        return operation;
+    }
+    
+    public void setOperation(String s){
+        operation = s;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton createMenuBtn;
     private javax.swing.JRadioButton deleteMenuBtn;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton launchAdminBtn;
     private javax.swing.JRadioButton readMenuBtn;
     private javax.swing.JLabel subTitleLbl;
     private javax.swing.JRadioButton updateMenuBtn;
