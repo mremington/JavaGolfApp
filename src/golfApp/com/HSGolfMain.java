@@ -6,6 +6,9 @@
 package golfApp.com;
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 
 /**
@@ -28,11 +31,7 @@ public class HSGolfMain extends javax.swing.JFrame {
         subPanel.setVisible(false);
         add(subPanel);
 
-        displayPanel = new DisplayInfoPnl();
-        displayPanel.setBounds(0, 0, getWidth(), getHeight());
-        displayPanel.setVisible(false);
-        add(displayPanel);
-
+        //displayPanel = new DisplayInfoPnl();
         displayType = "";
     }
 
@@ -149,12 +148,15 @@ public class HSGolfMain extends javax.swing.JFrame {
         if (schoolMenuBtn.isSelected()) {
             subPanel.setSubTitle("School Information Menu");
             subPanel.setVisible(true);
+            setDisplayType("school");
         } else if (userMenuBtn.isSelected()) {
             subPanel.setSubTitle("User Information Menu");
             subPanel.setVisible(true);
+            setDisplayType("user");
         } else if (leagueMenuBtn.isSelected()) {
             subPanel.setSubTitle("League Information Menu");
             subPanel.setVisible(true);
+            setDisplayType("league");
         }
     }//GEN-LAST:event_menuLaunchBtnActionPerformed
 
@@ -187,10 +189,18 @@ public class HSGolfMain extends javax.swing.JFrame {
     @Override
     public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        if (subPanel.getOperation().equals("read")) {
+        if (subPanel.getOperation().equals("read") && getDisplayType().equals("user")) {
             mainPnl.setVisible(false);
             subPanel.setVisible(false);
+
+            try {
+                displayPanel = new DisplayInfoPnl("users");
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(HSGolfMain.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            displayPanel.setBounds(0, 0, getWidth(), getHeight());
             displayPanel.setVisible(true);
+            add(displayPanel);
         }
         repaint();
     }

@@ -162,7 +162,7 @@ public class HSGolfSubPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(readMenuBtn.isSelected()){
            setOperation("read");
-           HSGolfMain.setDisplayType("read");
+           //HSGolfMain.setDisplayType("read");
         }else if(createMenuBtn.isSelected()){
             setOperation("create");
         }else if(updateMenuBtn.isSelected()){
