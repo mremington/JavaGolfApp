@@ -30,8 +30,8 @@ public class School extends BasicInfo implements Comparable {
     }
 
     @Override
-    public String displayInfo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean displayInfo() {
+        return true;
     }
 
     /**

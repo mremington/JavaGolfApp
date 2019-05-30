@@ -63,5 +63,6 @@ public abstract class BasicInfo {
         this.address = address;
     }
 
-    public abstract String displayInfo();
+    //used to determine what information is displayed 
+    public abstract boolean displayInfo();
 }

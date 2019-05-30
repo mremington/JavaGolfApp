@@ -118,8 +118,8 @@ public class User extends BasicInfo implements Comparable {
     }
     
     @Override
-    public String displayInfo() {
-        return getName() + " from " + getSchoolID().getName();
+    public boolean displayInfo() {
+        return false;
     }
     
     @Override

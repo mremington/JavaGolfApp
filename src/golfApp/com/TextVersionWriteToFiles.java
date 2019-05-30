@@ -20,6 +20,8 @@ public class TextVersionWriteToFiles {
         SchoolList schoolInfo = new SchoolList();
         UserList userInfo = new UserList();
         LeagueList leagueInfo = new LeagueList();
+        HSGolfMain gui = new HSGolfMain();
+        
 
         String response = "";
         Scanner input = new Scanner(System.in);
