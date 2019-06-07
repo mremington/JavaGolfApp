@@ -192,6 +192,7 @@ public class HSGolfMain extends javax.swing.JFrame {
         if (subPanel.getOperation().equals("read") && getDisplayType().equals("user")) {
             mainPnl.setVisible(false);
             subPanel.setVisible(false);
+           
 
             try {
                 displayPanel = new DisplayInfoPnl("users");
